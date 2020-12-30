@@ -17,6 +17,7 @@ class _HomePageState extends State<HomePage> {
    final passController = TextEditingController();
    String  username;
    String pass;
+   String vari = "";
 
 
   void getHttp() async {
@@ -27,7 +28,7 @@ class _HomePageState extends State<HomePage> {
           data: {"username": username, "password": pass});
 
 
-      print(" ${response.data["message"]}");
+      print(" ${response.data}");
       setState(() {
       user = response.data["user"];
         message = response.data["message"];
@@ -95,11 +96,17 @@ class _HomePageState extends State<HomePage> {
                     if(status){
                       return Navigator.push(context, MaterialPageRoute(builder: (context)=> SecondPage(username: user,)));
                     }
-                    return   Text(" ${message}" );
+                   if(status == false){
+                     vari = message;
+                      return SizedBox();
+                    }
 
                   });
                 }
             ),
+
+
+            Text("$vari")
 
           ],
         ),
